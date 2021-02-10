@@ -624,54 +624,54 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="311f5255-8c5e-4e12-893e-ca4edf1382b4" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🔍</span></div><h1 class="page-title">Investigation Tips</h1></header><div class="page-body"><p id="60d41464-8bd9-4578-8f60-1bee5fbaaf35" class="">The first point to start in the investigation is the <code>bugReportTemplate.txt</code> . This is found in the downloaded artifacts.</p><p id="6f1892ff-e8b2-4370-a999-3451add9d94a" class="">Lynn H has an analysis script that can point to some hints to possible failure points.</p><pre id="3ec0ec3f-fd5c-42f6-b19d-a7166e5ffe78" class="code"><code># !bin/csh -f
-find . -name hs_err\*.log -print
-find . -name jrockit.\*.dump -print
-find . -name core -print
-find . -name \*.hprof -print
+</style></head><body><article id="311f5255-8c5e-4e12-893e-ca4edf1382b4" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🔍</span></div><h1 class="page-title">Investigation Tips</h1></header><div class="page-body"><p id="60d41464-8bd9-4578-8f60-1bee5fbaaf35" class="">The first point to start in the investigation is the <code>bugReportTemplate.txt</code> . This is found in the downloaded artifacts.</p><p id="6f1892ff-e8b2-4370-a999-3451add9d94a" class="">Lynn H has an analysis script that can point to some hints to possible failure points.</p><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css')</style><pre id="3ec0ec3f-fd5c-42f6-b19d-a7166e5ffe78" class="code"><code><span class="token comment"># !bin/csh -f</span>
+<span class="token function">find</span> <span class="token builtin class-name">.</span> -name hs_err<span class="token punctuation">\</span>*.log -print
+<span class="token function">find</span> <span class="token builtin class-name">.</span> -name jrockit.<span class="token punctuation">\</span>*.dump -print
+<span class="token function">find</span> <span class="token builtin class-name">.</span> -name core -print
+<span class="token function">find</span> <span class="token builtin class-name">.</span> -name <span class="token punctuation">\</span>*.hprof -print
 
-fgrep OutOfMemory *.log */*.log | grep -v HeapDumpOnOutOfMemoryError
-fgrep OutOfSharedMemory *.log */*.log
-fgrep NullPointerException *.log */*.log
-fgrep ConcurrentModificationException *.log */*.log
-fgrep Assert *.log */*.log
-fgrep deadlock *.log */*.log
-fgrep InternalGemFire *.log */*.log
-fgrep &quot;Too many&quot; *.log */*.log
-fgrep &quot;Suspect notification&quot; *.log */*.log
-fgrep &quot;NoSuchMethod&quot; *.log */*.log
-fgrep &quot;NoClassDef&quot; *.log */*.log
+<span class="token function">fgrep</span> OutOfMemory *.log */*.log <span class="token operator">|</span> <span class="token function">grep</span> -v HeapDumpOnOutOfMemoryError
+<span class="token function">fgrep</span> OutOfSharedMemory *.log */*.log
+<span class="token function">fgrep</span> NullPointerException *.log */*.log
+<span class="token function">fgrep</span> ConcurrentModificationException *.log */*.log
+<span class="token function">fgrep</span> Assert *.log */*.log
+<span class="token function">fgrep</span> deadlock *.log */*.log
+<span class="token function">fgrep</span> InternalGemFire *.log */*.log
+<span class="token function">fgrep</span> <span class="token string">"Too many"</span> *.log */*.log
+<span class="token function">fgrep</span> <span class="token string">"Suspect notification"</span> *.log */*.log
+<span class="token function">fgrep</span> <span class="token string">"NoSuchMethod"</span> *.log */*.log
+<span class="token function">fgrep</span> <span class="token string">"NoClassDef"</span> *.log */*.log
 
-grep Exception *.log */*.log | grep -v continuing | grep -v HeapDumpOnOutOfMemoryError</code></pre><p id="c9cb6a41-8d7c-4011-860b-b1942dfb2054" class="">
-</p><p id="f796ca20-3986-458e-9a62-7745a4652792" class="">In the <code>bugReportTemplate.txt</code> it mentions what Object is missing </p><pre id="edeaa10d-a1f0-4e2c-ba94-8860a4bd9103" class="code"><code>*** Test failed with this error:
+<span class="token function">grep</span> Exception *.log */*.log <span class="token operator">|</span> <span class="token function">grep</span> -v continuing <span class="token operator">|</span> <span class="token function">grep</span> -v HeapDumpOnOutOfMemoryError</code></pre><p id="c9cb6a41-8d7c-4011-860b-b1942dfb2054" class="">
+</p><p id="f796ca20-3986-458e-9a62-7745a4652792" class="">In the <code>bugReportTemplate.txt</code> it mentions what Object is missing </p><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css')</style><pre id="edeaa10d-a1f0-4e2c-ba94-8860a4bd9103" class="code"><code>*** Test failed with this error:
 CLIENT vm_7_thr_36_edge3_host1_22790
-TASK[1] cq.CQTest.HydraTask_HADoEntryOps
-ERROR util.TestException: util.TestException: For cq Query_343, select * from /testRegion where aQueryObject.aQueryObject.aQueryObject.aByte = 0
-util.QueryObject with id 64036 (contains 4 levels, aPrimitiveLong=7962325250055692985) was NOT found in /testRegion
-util.QueryObject with id 64036 (contains 4 levels, aPrimitiveLong=7962325250055692985) was NOT found in regionSnapshot
-util.QueryObject with id 64036 (contains 4 levels, aPrimitiveLong=7962325250055692985) was NOT found in expected results
-util.QueryObject with id 64036 (contains 4 levels, aPrimitiveLong=7962325250055692985) was NOT found in SelectResults
-util.QueryObject with id 64036 (contains 4 levels, aPrimitiveLong=7962325250055692985) was found in gatherMap at key Object_1998</code></pre><p id="ba5621e8-7c1d-4fc1-bad5-4577c3c8ed14" class="">
-</p><p id="d04f8761-cf03-4e4b-af3e-706aa8f8d69c" class="">Try to figure out the life-cycle of the Object, like where was it created, trace it propagation through the distributed system. <code>grep </code>is your friend </p><p id="65b8cbf6-cbbd-48a6-9911-d5cf3e21f746" class="">The following example commands may help figure out where everything is. Replace the object ids and machine tags.</p><pre id="31d1bb13-3be9-4dde-b9cc-81c22880611f" class="code"><code>grep -r &quot;Object_9287: after&quot; .
-grep -r &quot;Listener.*Object_1998&quot; .</code></pre><p id="15868c67-864a-47e9-858b-b57a033f045a" class=""><code>SilenceListeners </code>etc. for the <code>Objects </code>also help us locate what changes are being made and where is it made</p><pre id="aa0d8149-88d5-4292-a330-a5be2d8d9baa" class="code"><code>[info 2020/08/14 08:09:16.366 PDT &lt;vm_14_thr_31_edge8_host1_16369&gt; tid=0x38] Invoked util.SilenceListener for key Object_1021: afterCreate in edge8, pid 16369, vmID 14, operation CREATE
-     whereIWasRegistered: 16369
-     event.getKey(): Object_1021
-     event.getOldValue(): null
-     event.getNewValue(): &lt;util.ValueHolder [myVersion=util.ValueHolder, myValue=&lt;java.lang.Long, value 1021&gt;, extraObject=&lt;[B Size 490, componentType byte&gt;, modVal=null]&gt;
-     event.isConcurrencyConflict(): false
-     event.getDistributedMember(): rs-FullRegression14102309a0i3large-hydra-client-95(edgegemfire8_host1_16369:16369:loner):58200:4cdc83ed:edgegemfire8_host1_16369
-     event.getCallbackArgument(): &lt;java.lang.String Size 36 &quot;Create event originated in pid 16369&quot;&gt;
-     event.getRegion(): /InterestPolicyRegion
-     event.isOriginRemote(): false
+TASK<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> cq.CQTest.HydraTask_HADoEntryOps
+ERROR util.TestException: util.TestException: For cq Query_343, <span class="token keyword">select</span> * from /testRegion where aQueryObject.aQueryObject.aQueryObject.aByte <span class="token operator">=</span> <span class="token number">0</span>
+util.QueryObject with <span class="token function">id</span> <span class="token number">64036</span> <span class="token punctuation">(</span>contains <span class="token number">4</span> levels, <span class="token assign-left variable">aPrimitiveLong</span><span class="token operator">=</span><span class="token number">7962325250055692985</span><span class="token punctuation">)</span> was NOT found <span class="token keyword">in</span> /testRegion
+util.QueryObject with <span class="token function">id</span> <span class="token number">64036</span> <span class="token punctuation">(</span>contains <span class="token number">4</span> levels, <span class="token assign-left variable">aPrimitiveLong</span><span class="token operator">=</span><span class="token number">7962325250055692985</span><span class="token punctuation">)</span> was NOT found <span class="token keyword">in</span> regionSnapshot
+util.QueryObject with <span class="token function">id</span> <span class="token number">64036</span> <span class="token punctuation">(</span>contains <span class="token number">4</span> levels, <span class="token assign-left variable">aPrimitiveLong</span><span class="token operator">=</span><span class="token number">7962325250055692985</span><span class="token punctuation">)</span> was NOT found <span class="token keyword">in</span> expected results
+util.QueryObject with <span class="token function">id</span> <span class="token number">64036</span> <span class="token punctuation">(</span>contains <span class="token number">4</span> levels, <span class="token assign-left variable">aPrimitiveLong</span><span class="token operator">=</span><span class="token number">7962325250055692985</span><span class="token punctuation">)</span> was NOT found <span class="token keyword">in</span> SelectResults
+util.QueryObject with <span class="token function">id</span> <span class="token number">64036</span> <span class="token punctuation">(</span>contains <span class="token number">4</span> levels, <span class="token assign-left variable">aPrimitiveLong</span><span class="token operator">=</span><span class="token number">7962325250055692985</span><span class="token punctuation">)</span> was found <span class="token keyword">in</span> gatherMap at key Object_1998</code></pre><p id="ba5621e8-7c1d-4fc1-bad5-4577c3c8ed14" class="">
+</p><p id="d04f8761-cf03-4e4b-af3e-706aa8f8d69c" class="">Try to figure out the life-cycle of the Object, like where was it created, trace it propagation through the distributed system. <code>grep </code>is your friend </p><p id="65b8cbf6-cbbd-48a6-9911-d5cf3e21f746" class="">The following example commands may help figure out where everything is. Replace the object ids and machine tags.</p><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css')</style><pre id="31d1bb13-3be9-4dde-b9cc-81c22880611f" class="code"><code><span class="token function">grep</span> -r <span class="token string">"Object_9287: after"</span> <span class="token builtin class-name">.</span>
+<span class="token function">grep</span> -r <span class="token string">"Listener.*Object_1998"</span> <span class="token builtin class-name">.</span></code></pre><p id="15868c67-864a-47e9-858b-b57a033f045a" class=""><code>SilenceListeners </code>etc. for the <code>Objects </code>also help us locate what changes are being made and where is it made</p><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css')</style><pre id="aa0d8149-88d5-4292-a330-a5be2d8d9baa" class="code"><code><span class="token punctuation">[</span>info <span class="token number">2020</span>/08/14 08:09:16.366 PDT <span class="token operator">&lt;</span>vm_14_thr_31_edge8_host1_1636<span class="token operator"><span class="token file-descriptor important">9</span>></span> <span class="token assign-left variable">tid</span><span class="token operator">=</span>0x38<span class="token punctuation">]</span> Invoked util.SilenceListener <span class="token keyword">for</span> key Object_1021: afterCreate <span class="token keyword">in</span> edge8, pid <span class="token number">16369</span>, vmID <span class="token number">14</span>, operation CREATE
+     whereIWasRegistered: <span class="token number">16369</span>
+     event.getKey<span class="token punctuation">(</span><span class="token punctuation">)</span>: Object_1021
+     event.getOldValue<span class="token punctuation">(</span><span class="token punctuation">)</span>: null
+     event.getNewValue<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token operator">&lt;</span>util.ValueHolder <span class="token punctuation">[</span>myVersion<span class="token operator">=</span>util.ValueHolder, <span class="token assign-left variable">myValue</span><span class="token operator">=</span><span class="token operator">&lt;</span>java.lang.Long, value <span class="token number">102</span><span class="token operator"><span class="token file-descriptor important">1</span>></span>, <span class="token assign-left variable">extraObject</span><span class="token operator">=</span><span class="token operator">&lt;</span><span class="token punctuation">[</span>B Size <span class="token number">490</span>, componentType byte<span class="token operator">></span>, <span class="token assign-left variable">modVal</span><span class="token operator">=</span>null<span class="token punctuation">]</span><span class="token operator">></span>
+     event.isConcurrencyConflict<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span>
+     event.getDistributedMember<span class="token punctuation">(</span><span class="token punctuation">)</span>: rs-FullRegression14102309a0i3large-hydra-client-95<span class="token punctuation">(</span>edgegemfire8_host1_16369:16369:loner<span class="token punctuation">)</span>:58200:4cdc83ed:edgegemfire8_host1_16369
+     event.getCallbackArgument<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token operator">&lt;</span>java.lang.String Size <span class="token number">36</span> <span class="token string">"Create event originated in pid 16369"</span><span class="token operator">></span>
+     event.getRegion<span class="token punctuation">(</span><span class="token punctuation">)</span>: /InterestPolicyRegion
+     event.isOriginRemote<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span>
      Operation: CREATE
-     Operation.isLoad(): false
-     Operation.isLocalLoad(): false
-     Operation.isNetLoad(): false
-     Operation.isNetSearch(): false
-     Operation.isPutAll(): false
-     Operation.isRemoveAll(): false
-     Operation.isDistributed(): true
-     Operation.isExpiration(): false</code></pre><p id="ea3cf470-b3a0-4f28-9bcd-07ec42f8cd39" class="">
+     Operation.isLoad<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span>
+     Operation.isLocalLoad<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span>
+     Operation.isNetLoad<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span>
+     Operation.isNetSearch<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span>
+     Operation.isPutAll<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span>
+     Operation.isRemoveAll<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span>
+     Operation.isDistributed<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">true</span>
+     Operation.isExpiration<span class="token punctuation">(</span><span class="token punctuation">)</span>: <span class="token boolean">false</span></code></pre><p id="ea3cf470-b3a0-4f28-9bcd-07ec42f8cd39" class="">
 </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1569cad8-5fa3-485c-92be-bf185b5c8be4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The code for the tests can be located in <a href="https://github.com/gemfire/gemfire">here</a>. Using the Analyze Stacktrace feature in IntelliJ can help with what the test code is trying to do.</div></figure><p id="44cb3d91-cc55-452d-bb7d-709e63c4ef64" class="">
 </p><p id="b2c16461-06e0-4288-ad67-a8c44349b52d" class="">Mention all the results of your investigation while creating a new JIRA ticket.</p><figure id="d76520f5-f965-4222-bfc0-9cdda10fe87a" class="link-to-page"><a href="../Creating%20a%20new%20JIRA%20ticket%20d76520f5f9654222bfc09cdda10fe87a.html"><span class="icon">🆕</span>Creating a new JIRA ticket</a></figure><p id="b6f9e5f2-5957-47a4-8a58-f98270f61533" class="">
 </p></div></article></body></html>
